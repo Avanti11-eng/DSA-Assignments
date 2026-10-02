@@ -1,0 +1,35 @@
+class Node:
+    def __init__(self, adm_no, name):
+        self.adm_no = adm_no
+        self.name = name
+        self.left = None
+        self.right = None
+
+def insert(root, adm_no, name):
+    if root is None:
+        return Node(adm_no, name)
+
+    if adm_no < root.adm_no:
+        root.left = insert(root.left, adm_no, name)
+    else:
+        root.right = insert(root.right, adm_no, name)
+
+    return root
+
+def inorder(root):
+    if root:
+        inorder(root.left)
+        print(root.adm_no, root.name)
+        inorder(root.right)
+
+# Create BST
+root = None
+
+root = insert(root, 103, "Rahul")
+root = insert(root, 101, "Priya")
+root = insert(root, 105, "Amit")
+root = insert(root, 102, "Sneha")
+root = insert(root, 104, "Rohan")
+
+print("Student Admission Records:")
+inorder(root)
