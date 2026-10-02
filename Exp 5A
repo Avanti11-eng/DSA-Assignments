@@ -1,0 +1,59 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def insert(root, data):
+    if root is None:
+        return Node(data)
+
+    if data < root.data:
+        root.left = insert(root.left, data)
+    else:
+        root.right = insert(root.right, data)
+
+    return root
+
+# Create BST
+root = None
+values = [50, 30, 70, 20, 40, 60, 80]
+
+for value in values:
+    root = insert(root, value)
+
+# Inorder - Non Recursive
+def inorder(root):
+    stack = []
+    temp = root
+
+    while stack or temp:
+        while temp:
+            stack.append(temp)
+            temp = temp.left
+
+        temp = stack.pop()
+        print(temp.data, end=" ")
+        temp = temp.right
+
+# Preorder - Non Recursive
+def preorder(root):
+    if root is None:
+        return
+
+    stack = [root]
+
+    while stack:
+        temp = stack.pop()
+        print(temp.data, end=" ")
+
+        if temp.right:
+            stack.append(temp.right)
+        if temp.left:
+            stack.append(temp.left)
+
+print("Inorder:")
+inorder(root)
+
+print("\nPreorder:")
+preorder(root)
